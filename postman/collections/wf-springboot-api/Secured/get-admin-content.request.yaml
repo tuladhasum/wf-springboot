@@ -1,0 +1,27 @@
+$kind: http-request
+name: 'GET /api/secure/admin'
+method: GET
+url: '{{baseUrl}}/api/secure/admin'
+order: 2000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{bearerToken}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200 for admin role", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Response contains access granted message", function () {
+          const json = pm.response.json();
+          pm.expect(json).to.have.property("message");
+          pm.expect(json.message).to.include("Access Granted");
+      });
+
+      pm.test("Response time is acceptable", function () {
+          pm.expect(pm.response.responseTime).to.be.below(3000);
+      });

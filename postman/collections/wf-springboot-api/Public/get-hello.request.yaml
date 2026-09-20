@@ -1,0 +1,22 @@
+$kind: http-request
+name: 'GET /api/hello'
+method: GET
+url: '{{baseUrl}}/api/hello'
+order: 1000
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Response has message field", function () {
+          const json = pm.response.json();
+          pm.expect(json).to.have.property("message");
+          pm.expect(json.message).to.be.a("string").and.not.empty;
+      });
+
+      pm.test("Response time is acceptable", function () {
+          pm.expect(pm.response.responseTime).to.be.below(2000);
+      });

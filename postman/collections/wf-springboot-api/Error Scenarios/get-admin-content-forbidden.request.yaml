@@ -1,0 +1,23 @@
+$kind: http-request
+name: 'GET /api/secure/admin — non-admin token (expect 403)'
+method: GET
+url: '{{baseUrl}}/api/secure/admin'
+order: 2000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{bearerToken}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 403 for non-admin user", function () {
+          pm.response.to.have.status(403);
+      });
+
+      pm.test("Response body contains error field", function () {
+          const json = pm.response.json();
+          pm.expect(json).to.have.property("error");
+          pm.expect(json.error).to.equal("Forbidden");
+      });

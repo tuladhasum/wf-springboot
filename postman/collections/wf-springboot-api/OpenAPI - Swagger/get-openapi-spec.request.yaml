@@ -1,0 +1,24 @@
+$kind: http-request
+name: 'GET /v3/api-docs'
+method: GET
+url: '{{baseUrl}}/v3/api-docs'
+order: 1000
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Response is valid OpenAPI JSON", function () {
+          const json = pm.response.json();
+          pm.expect(json).to.have.property("openapi");
+          pm.expect(json.openapi).to.match(/^3\./);
+      });
+
+      pm.test("API info block is present", function () {
+          const json = pm.response.json();
+          pm.expect(json).to.have.property("info");
+          pm.expect(json.info).to.have.property("title");
+      });

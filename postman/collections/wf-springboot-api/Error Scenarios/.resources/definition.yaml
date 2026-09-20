@@ -1,0 +1,7 @@
+$kind: collection
+name: 'Error Scenarios'
+description: |-
+  Negative test cases validating the custom error handlers.
+  - 401 Unauthorized — hitting a secured endpoint without a token (CustomAuthenticationEntryPoint)
+  - 403 Forbidden    — hitting /api/secure/admin with a non-admin JWT (CustomAccessDeniedHandler)
+order: 4000

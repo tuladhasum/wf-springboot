@@ -1,0 +1,14 @@
+$kind: collection
+name: WF Spring Boot API
+description: |-
+  Collection for the Wells Fargo Spring Boot 4 API project.
+  Covers all implemented HTTP endpoints including public and secured routes.
+  Authentication uses Keycloak-issued JWT Bearer tokens (OAuth2 Resource Server).
+  Issuer: https://keycloak.coolify.sumit270.com/realms/wellsfargo-realm
+variables:
+  - key: baseUrl
+    value: 'http://localhost:8080'
+    description: Base URL of the running Spring Boot application
+  - key: bearerToken
+    value: ''
+    description: 'JWT Bearer token obtained from Keycloak. Set this before calling secured endpoints.'

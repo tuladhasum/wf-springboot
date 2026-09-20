@@ -1,0 +1,4 @@
+$kind: collection
+name: Public
+description: Publicly accessible endpoints — no authentication required.
+order: 1000

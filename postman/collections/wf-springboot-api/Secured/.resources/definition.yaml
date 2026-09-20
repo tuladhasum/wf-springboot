@@ -1,0 +1,8 @@
+$kind: collection
+name: Secured
+description: |-
+  Endpoints requiring a valid Keycloak JWT Bearer token.
+  - GET /api/secure/user  — any authenticated user
+  - GET /api/secure/admin — requires ROLE_ADMIN authority
+  Set the {{bearerToken}} collection variable before sending these requests.
+order: 2000

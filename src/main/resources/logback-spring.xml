@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Include default Spring Boot logging configuration base -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <!-- Standard Console Appender with Process Info and Thread details -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!-- Pattern that prints metadata on line 1, and the message indented on line 2 -->
+            <pattern>%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint}
+  %clr(%m){white}
+${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Simple Console Appender: Date, Level, Source on line 1; Indented Color-Coded message on line 2 -->
+    <appender name="SIMPLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){white} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(%-40.40logger{39}){cyan} :
+  %clr(%m){faint}
+${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <!-- Switch between CONSOLE and SIMPLE appender here -->
+        <appender-ref ref="SIMPLE"/>
+    </root>
+</configuration>

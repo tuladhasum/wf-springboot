@@ -1,0 +1,38 @@
+$kind: http-request
+name: 'GET /api/secure/user'
+method: GET
+url: '{{baseUrl}}/api/secure/user'
+order: 1000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{bearerToken}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Response contains username", function () {
+          const json = pm.response.json();
+          pm.expect(json).to.have.property("username");
+          pm.expect(json.username).to.be.a("string").and.not.empty;
+      });
+
+      pm.test("Response contains authorities array", function () {
+          const json = pm.response.json();
+          pm.expect(json).to.have.property("authorities");
+          pm.expect(json.authorities).to.be.an("array");
+      });
+
+      pm.test("Response contains tokenAttributes", function () {
+          const json = pm.response.json();
+          pm.expect(json).to.have.property("tokenAttributes");
+      });
+
+      pm.test("Response time is acceptable", function () {
+          pm.expect(pm.response.responseTime).to.be.below(3000);
+      });

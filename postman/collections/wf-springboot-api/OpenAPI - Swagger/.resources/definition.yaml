@@ -1,0 +1,8 @@
+$kind: collection
+name: 'OpenAPI - Swagger'
+description: |-
+  Endpoints for the auto-generated OpenAPI 3 documentation (springdoc-openapi).
+  These paths are public (no authentication required).
+  - GET /v3/api-docs          — raw OpenAPI JSON spec
+  - GET /swagger-ui/index.html — interactive Swagger UI
+order: 3000

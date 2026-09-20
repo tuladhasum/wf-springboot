@@ -1,0 +1,12 @@
+$kind: http-request
+name: 'GET /swagger-ui/index.html'
+method: GET
+url: '{{baseUrl}}/swagger-ui/index.html'
+order: 2000
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Swagger UI is reachable (200 or 302)", function () {
+          pm.expect(pm.response.code).to.be.oneOf([200, 302]);
+      });

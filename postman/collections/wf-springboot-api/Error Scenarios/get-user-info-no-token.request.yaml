@@ -1,0 +1,18 @@
+$kind: http-request
+name: 'GET /api/secure/user — no token (expect 401)'
+method: GET
+url: '{{baseUrl}}/api/secure/user'
+order: 1000
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status code is 401 when no token provided", function () {
+          pm.response.to.have.status(401);
+      });
+
+      pm.test("Response body contains error field", function () {
+          const json = pm.response.json();
+          pm.expect(json).to.have.property("error");
+          pm.expect(json.error).to.equal("Unauthorized");
+      });
