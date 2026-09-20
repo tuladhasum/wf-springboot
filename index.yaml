@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  wf-springboot:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2026-09-20T14:57:19.547847508Z"
+    description: A Helm chart for Kubernetes
+    digest: 27f5fb15375639462ca3ded49a89b10af40b5357faf5bab729efe252ca843403
+    name: wf-springboot
+    type: application
+    urls:
+    - https://github.com/tuladhasum/wf-springboot/releases/download/wf-springboot-0.1.1/wf-springboot-0.1.1.tgz
+    version: 0.1.1
+generated: "2026-09-20T14:57:19.547853129Z"
